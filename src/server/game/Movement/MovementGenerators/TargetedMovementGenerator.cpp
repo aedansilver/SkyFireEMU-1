@@ -144,7 +144,7 @@ bool TargetedMovementGeneratorMedium<T, D>::Update(T &owner, const uint32 & time
         i_recheckDistance.Reset(50);
         //More distance let have better performance, less distance let have more sensitive reaction at target move.
         float allowed_dist = i_target->GetObjectSize() + owner.GetObjectSize() + MELEE_RANGE - 0.5f;
-        float dist = (owner.movespline->FinalDestination() - G3D::Vector3(i_target->GetPositionX(),i_target->GetPositionY(),i_target->GetPositionZ())).squaredLength();
+        float dist = (owner.movespline->FinalDestination() - G3D::Vector3(i_target->GetPositionX(), i_target->GetPositionY(), i_target->GetPositionZ())).squaredLength();
         if (dist >= allowed_dist * allowed_dist)
             _setTargetLocation(owner);
     }
@@ -174,7 +174,7 @@ template<class T>
 void ChaseMovementGenerator<T>::_reachTarget(T &owner)
 {
     if (owner.IsWithinMeleeRange(this->i_target.getTarget()))
-        owner.Attack(this->i_target.getTarget(),true);
+        owner.Attack(this->i_target.getTarget(), true);
 }
 
 template<>

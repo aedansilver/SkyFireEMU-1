@@ -2413,7 +2413,7 @@ bool Aura::CallScriptEffectProc(AuraEffect const * aurEff, Unit* pUnit, Unit *pV
     {
         (*scritr)->_PrepareScriptCall(AURA_SCRIPT_HOOK_EFFECT_PROC/*, aurApp*/);
         std::list<AuraScript::EffectProcHandler>::iterator effEndItr = (*scritr)->OnEffectProc.end(), effItr = (*scritr)->OnEffectProc.begin();
-        for(; effItr != effEndItr ; ++effItr)
+        for (; effItr != effEndItr ; ++effItr)
         {
             if ((*effItr).IsEffectAffected(m_spellInfo, aurEff->GetEffIndex()))
                 (*effItr).Call(*scritr, aurEff, pUnit, pVictim, damage, procSpell, procFlag, procExtra, attType, cooldown);

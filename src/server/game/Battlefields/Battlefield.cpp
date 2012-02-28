@@ -459,7 +459,7 @@ WorldPacket Battlefield::BuildWarningAnnPacket(std::string msg)
     return data;
 }
 
-void Battlefield::SendWarningToAllInZone(int32 entry,...)
+void Battlefield::SendWarningToAllInZone(int32 entry, ...)
 {
     const char *format = sObjectMgr->GetSkyFireStringForDBCLocale(entry);
     va_list ap;
@@ -472,7 +472,7 @@ void Battlefield::SendWarningToAllInZone(int32 entry,...)
     BroadcastPacketZone(data);
 }
 
-void Battlefield::SendWarningToAllInWar(int32 entry,...)
+void Battlefield::SendWarningToAllInWar(int32 entry, ...)
 {
     const char *format = sObjectMgr->GetSkyFireStringForDBCLocale(entry);
     va_list ap;

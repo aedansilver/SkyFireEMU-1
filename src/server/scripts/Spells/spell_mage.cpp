@@ -375,7 +375,7 @@ public:
 
                 if (!templist.empty())
                     for (std::list<Creature*>::const_iterator itr = templist.begin(); itr != templist.end(); ++itr)
-                        if((*itr)->GetEntry() == me->GetEntry() && ((*itr)->GetOwner() == me->GetOwner() && *itr != me))
+                        if ((*itr)->GetEntry() == me->GetEntry() && ((*itr)->GetOwner() == me->GetOwner() && *itr != me))
                             (*itr)->DisappearAndDie();
                 templist.clear();
             }

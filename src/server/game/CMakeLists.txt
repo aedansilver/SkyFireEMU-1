@@ -9,7 +9,7 @@
 # WITHOUT ANY WARRANTY, to the extent permitted by law; without even the
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-if( USE_COREPCH )
+if ( USE_COREPCH )
   include_directories(${CMAKE_CURRENT_BINARY_DIR})
 endif()
 
@@ -50,6 +50,7 @@ file(GLOB_RECURSE sources_Spells Spells/*.cpp Spells/*.h)
 file(GLOB_RECURSE sources_Texts Texts/*.cpp Texts/*.h)
 file(GLOB_RECURSE sources_Tools Tools/*.cpp Tools/*.h)
 file(GLOB_RECURSE sources_Tickets Tickets/*.cpp Tickets/*.h)
+file(GLOB_RECURSE sources_Warden Warden/*.cpp Warden/*.h)
 file(GLOB_RECURSE sources_Weather Weather/*.cpp Weather/*.h)
 file(GLOB_RECURSE sources_World World/*.cpp World/*.h)
 
@@ -93,12 +94,13 @@ source_group(Spells FILES ${sources_Spells})
 source_group(Texts FILES ${sources_Texts})
 source_group(Tools FILES ${sources_Tools})
 source_group(Tickets FILES ${sources_Tickets})
+source_group(Warden FILES ${sources_Warden})
 source_group(Weather FILES ${sources_Weather})
 source_group(World FILES ${sources_World})
 
 # Create game-libary
 
-if( USE_COREPCH AND MSVC )
+if ( USE_COREPCH AND MSVC )
   set(game_STAT_SRCS
     PrecompiledHeaders/gamePCH.cpp
     PrecompiledHeaders/gamePCH.h
@@ -144,6 +146,7 @@ set(game_STAT_SRCS
   ${sources_Texts}
   ${sources_Tools}
   ${sources_Tickets}
+  ${sources_Warden}    
   ${sources_Weather}
   ${sources_World}
 )
@@ -171,6 +174,7 @@ include_directories(
   ${CMAKE_SOURCE_DIR}/src/server/shared/Packets
   ${CMAKE_SOURCE_DIR}/src/server/shared/Threading
   ${CMAKE_SOURCE_DIR}/src/server/shared/Utilities
+  ${CMAKE_SOURCE_DIR}/src/server/wardenserver/Protocol
   ${CMAKE_CURRENT_SOURCE_DIR}
   ${CMAKE_CURRENT_SOURCE_DIR}/Accounts
   ${CMAKE_CURRENT_SOURCE_DIR}/Achievements
@@ -241,6 +245,7 @@ include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}/Texts
   ${CMAKE_CURRENT_SOURCE_DIR}/Tools
   ${CMAKE_CURRENT_SOURCE_DIR}/Tickets
+  ${CMAKE_CURRENT_SOURCE_DIR}/Warden 
   ${CMAKE_CURRENT_SOURCE_DIR}/Weather
   ${CMAKE_CURRENT_SOURCE_DIR}/World
   ${CMAKE_SOURCE_DIR}/src/server/scripts/PrecompiledHeaders
@@ -254,8 +259,8 @@ add_library(game STATIC ${game_STAT_SRCS})
 add_dependencies(game revision.h)
 
 # Generate precompiled header
-if( USE_COREPCH )
-  if(CMAKE_COMPILER_IS_GNUCXX)
+if ( USE_COREPCH )
+  if (CMAKE_COMPILER_IS_GNUCXX)
     add_precompiled_header(game ${CMAKE_CURRENT_SOURCE_DIR}/PrecompiledHeaders/gamePCH.h)
   elseif(MSVC)
     add_native_precompiled_header(game ${CMAKE_CURRENT_SOURCE_DIR}/PrecompiledHeaders/gamePCH)

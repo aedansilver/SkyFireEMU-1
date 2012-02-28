@@ -9,7 +9,7 @@
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 # Enable precompiled headers when using the GCC compiler.
-if( USE_SCRIPTPCH )
+if ( USE_SCRIPTPCH )
   include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}
   )
@@ -41,7 +41,7 @@ source_group(Examples FILES ${sources_Examples})
 source_group(Spells FILES ${sources_Spells})
 source_group(World FILES ${sources_World})
 
- if( USE_SCRIPTPCH AND MSVC )
+ if ( USE_SCRIPTPCH AND MSVC )
   file(GLOB_RECURSE sources_PreHeaders PrecompiledHeaders/ScriptPCH.cpp PrecompiledHeaders/ScriptPCH.h)
   source_group(PrecompiledHeaders FILES ${sources_PreHeaders})
   set(scripts_STAT_SRCS
@@ -66,11 +66,11 @@ source_group(ScriptedAI FILES ${sources_ScriptedAI})
   ${sources_ScriptedAI}
   )
 
-if(EXAMPLES)
+if (EXAMPLES)
   include(Examples/CMakeLists.txt)
  endif()
  
-if(SCRIPTS)
+if (SCRIPTS)
   include(Custom/CMakeLists.txt)
   include(World/CMakeLists.txt)
   include(OutdoorPvP/CMakeLists.txt)
@@ -184,8 +184,8 @@ add_library(scripts STATIC ${scripts_STAT_SRCS})
 add_dependencies(scripts revision.h)
 
 # Generate precompiled header
-if( USE_SCRIPTPCH )
-  if(CMAKE_COMPILER_IS_GNUCXX)
+if ( USE_SCRIPTPCH )
+  if (CMAKE_COMPILER_IS_GNUCXX)
     add_precompiled_header(scripts ${CMAKE_CURRENT_SOURCE_DIR}/PrecompiledHeaders/ScriptPCH.h)
   elseif(MSVC)
     add_native_precompiled_header(scripts ${CMAKE_CURRENT_SOURCE_DIR}/PrecompiledHeaders/ScriptPCH)

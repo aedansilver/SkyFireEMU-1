@@ -247,7 +247,7 @@ void WorldSession::HandleTrainerBuySpellOpcode(WorldPacket & recv_data)
         _player->ModifyMoney(-int32(nSpellCost));
 
         unit->SendPlaySpellVisual(179);
-        unit->SendPlaySpellImpact(_player->GetGUID(),362);
+        unit->SendPlaySpellImpact(_player->GetGUID(), 362);
 
         // learn explicitly or cast explicitly
         if (trainer_spell->IsCastable())

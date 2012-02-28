@@ -43,6 +43,7 @@
 
 #include "Common.h"
 #include "AuthCrypt.h"
+#include "BigNumber.h"
 
 class ACE_Message_Block;
 class WorldPacket;
@@ -121,6 +122,9 @@ class WorldSocket : protected WorldHandler
 
         /// Remove reference to this object.
         long RemoveReference (void);
+
+        /// Return the session key
+        BigNumber& GetSessionKey() { return m_s; }
 
     protected:
         /// things called by ACE framework.
@@ -213,6 +217,8 @@ class WorldSocket : protected WorldHandler
         bool m_OutActive;
 
         uint32 m_Seed;
+
+        BigNumber m_s;
 };
 
 #endif  /* _WORLDSOCKET_H */

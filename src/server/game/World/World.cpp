@@ -77,6 +77,7 @@
 #include "SmartAI.h"
 #include "Channel.h"
 #include "DB2Stores.h"
+#include "WardenMgr.h"
 
 volatile bool World::m_stopEvent = false;
 uint8 World::m_ExitCode = SHUTDOWN_EXIT_CODE;
@@ -419,13 +420,13 @@ void World::LoadConfigSettings(bool reload)
     m_int_configs[CONFIG_ENABLE_SINFO_LOGIN] = ConfigMgr::GetIntDefault("Server.LoginInfo", 0);
 
     ///- Read all rates from the config file
-    rate_values[RATE_HEALTH]      = ConfigMgr::GetFloatDefault("Rate.Health", 1);
+    rate_values[RATE_HEALTH] = ConfigMgr::GetFloatDefault("Rate.Health", 1);
     if (rate_values[RATE_HEALTH] < 0)
     {
         sLog->outError("Rate.Health (%f) must be > 0. Using 1 instead.", rate_values[RATE_HEALTH]);
         rate_values[RATE_HEALTH] = 1;
     }
-    rate_values[RATE_POWER_MANA]  = ConfigMgr::GetFloatDefault("Rate.Mana", 1);
+    rate_values[RATE_POWER_MANA] = ConfigMgr::GetFloatDefault("Rate.Mana", 1);
     if (rate_values[RATE_POWER_MANA] < 0)
     {
         sLog->outError("Rate.Mana (%f) must be > 0. Using 1 instead.", rate_values[RATE_POWER_MANA]);
@@ -482,23 +483,23 @@ void World::LoadConfigSettings(bool reload)
     rate_values[RATE_CREATURE_ELITE_ELITE_HP]     = ConfigMgr::GetFloatDefault("Rate.Creature.Elite.Elite.HP", 1.0f);
     rate_values[RATE_CREATURE_ELITE_RAREELITE_HP] = ConfigMgr::GetFloatDefault("Rate.Creature.Elite.RAREELITE.HP", 1.0f);
     rate_values[RATE_CREATURE_ELITE_WORLDBOSS_HP] = ConfigMgr::GetFloatDefault("Rate.Creature.Elite.WORLDBOSS.HP", 1.0f);
-    rate_values[RATE_CREATURE_ELITE_RARE_HP]      = ConfigMgr::GetFloatDefault("Rate.Creature.Elite.RARE.HP", 1.0f);
-    rate_values[RATE_CREATURE_NORMAL_SPELLDAMAGE]          = ConfigMgr::GetFloatDefault("Rate.Creature.Normal.SpellDamage", 1.0f);
-    rate_values[RATE_CREATURE_ELITE_ELITE_SPELLDAMAGE]     = ConfigMgr::GetFloatDefault("Rate.Creature.Elite.Elite.SpellDamage", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_RARE_HP] = ConfigMgr::GetFloatDefault("Rate.Creature.Elite.RARE.HP", 1.0f);
+    rate_values[RATE_CREATURE_NORMAL_SPELLDAMAGE] = ConfigMgr::GetFloatDefault("Rate.Creature.Normal.SpellDamage", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_ELITE_SPELLDAMAGE] = ConfigMgr::GetFloatDefault("Rate.Creature.Elite.Elite.SpellDamage", 1.0f);
     rate_values[RATE_CREATURE_ELITE_RAREELITE_SPELLDAMAGE] = ConfigMgr::GetFloatDefault("Rate.Creature.Elite.RAREELITE.SpellDamage", 1.0f);
     rate_values[RATE_CREATURE_ELITE_WORLDBOSS_SPELLDAMAGE] = ConfigMgr::GetFloatDefault("Rate.Creature.Elite.WORLDBOSS.SpellDamage", 1.0f);
-    rate_values[RATE_CREATURE_ELITE_RARE_SPELLDAMAGE]      = ConfigMgr::GetFloatDefault("Rate.Creature.Elite.RARE.SpellDamage", 1.0f);
+    rate_values[RATE_CREATURE_ELITE_RARE_SPELLDAMAGE] = ConfigMgr::GetFloatDefault("Rate.Creature.Elite.RARE.SpellDamage", 1.0f);
     rate_values[RATE_CREATURE_AGGRO]  = ConfigMgr::GetFloatDefault("Rate.Creature.Aggro", 1.0f);
-    rate_values[RATE_REST_INGAME]                    = ConfigMgr::GetFloatDefault("Rate.Rest.InGame", 1.0f);
+    rate_values[RATE_REST_INGAME]  = ConfigMgr::GetFloatDefault("Rate.Rest.InGame", 1.0f);
     rate_values[RATE_REST_OFFLINE_IN_TAVERN_OR_CITY] = ConfigMgr::GetFloatDefault("Rate.Rest.Offline.InTavernOrCity", 1.0f);
-    rate_values[RATE_REST_OFFLINE_IN_WILDERNESS]     = ConfigMgr::GetFloatDefault("Rate.Rest.Offline.InWilderness", 1.0f);
-    rate_values[RATE_DAMAGE_FALL]  = ConfigMgr::GetFloatDefault("Rate.Damage.Fall", 1.0f);
-    rate_values[RATE_AUCTION_TIME]  = ConfigMgr::GetFloatDefault("Rate.Auction.Time", 1.0f);
+    rate_values[RATE_REST_OFFLINE_IN_WILDERNESS]  = ConfigMgr::GetFloatDefault("Rate.Rest.Offline.InWilderness", 1.0f);
+    rate_values[RATE_DAMAGE_FALL] = ConfigMgr::GetFloatDefault("Rate.Damage.Fall", 1.0f);
+    rate_values[RATE_AUCTION_TIME] = ConfigMgr::GetFloatDefault("Rate.Auction.Time", 1.0f);
     rate_values[RATE_AUCTION_DEPOSIT] = ConfigMgr::GetFloatDefault("Rate.Auction.Deposit", 1.0f);
     rate_values[RATE_AUCTION_CUT] = ConfigMgr::GetFloatDefault("Rate.Auction.Cut", 1.0f);
     rate_values[RATE_HONOR] = ConfigMgr::GetFloatDefault("Rate.Honor", 1.0f);
     rate_values[RATE_MINING_AMOUNT] = ConfigMgr::GetFloatDefault("Rate.Mining.Amount", 1.0f);
-    rate_values[RATE_MINING_NEXT]   = ConfigMgr::GetFloatDefault("Rate.Mining.Next", 1.0f);
+    rate_values[RATE_MINING_NEXT] = ConfigMgr::GetFloatDefault("Rate.Mining.Next", 1.0f);
     rate_values[RATE_INSTANCE_RESET_TIME] = ConfigMgr::GetFloatDefault("Rate.InstanceResetTime", 1.0f);
     rate_values[RATE_TALENT] = ConfigMgr::GetFloatDefault("Rate.Talent", 1.0f);
     if (rate_values[RATE_TALENT] < 0.0f)
@@ -1229,6 +1230,9 @@ void World::LoadConfigSettings(bool reload)
     m_bool_configs[CONFIG_PDUMP_NO_PATHS] = ConfigMgr::GetBoolDefault("PlayerDump.DisallowPaths", true);
     m_bool_configs[CONFIG_PDUMP_NO_OVERWRITE] = ConfigMgr::GetBoolDefault("PlayerDump.DisallowOverwrite", true);
 
+    // Warden ban time
+    m_bool_configs[CONFIG_UINT32_WARDEN_BAN_TIME] = ConfigMgr::GetBoolDefault("Wardenserver.BanLength", 1);
+
     sScriptMgr->OnConfigLoad(reload);
 }
 
@@ -1743,6 +1747,20 @@ void World::SetInitialWorldSettings()
     uint32 nextGameEvent = sGameEventMgr->StartSystem();
     m_timers[WUPDATE_EVENTS].SetInterval(nextGameEvent);    //depend on next event
 
+    if (ConfigMgr::GetBoolDefault("wardenserver.enable", true))
+    {
+        sLog->outString("Starting Warden system...");
+        sWardenMgr->Initialize(ConfigMgr::GetStringDefault("wardenserver.address", "127.0.0.1").c_str(),
+        ConfigMgr::GetIntDefault("wardenserver.port", 4321),
+        ConfigMgr::GetBoolDefault("wardenserver.ban", false));
+        m_timers[WUPDATE_WARDEN].SetInterval(1 * IN_MILLISECONDS);
+    }
+    else
+    {
+        sLog->outString("Warden system disabled, skipping");
+        sWardenMgr->SetDisabled();
+    }
+
     // Delete all characters which have been deleted X days before
     Player::DeleteOldCharacters();
 
@@ -2042,6 +2060,18 @@ void World::Update(uint32 diff)
     sBattlefieldMgr.Update(diff);
     RecordTimeDiff("BattlefieldMgr");
 
+    ///- <li> Handle warden manager update
+    if (m_timers[WUPDATE_WARDEN].Passed())
+    {
+        ///- Update WardenTimer in all sessions
+        for (SessionMap::iterator itr = m_sessions.begin(); itr != m_sessions.end(); ++itr)
+            itr->second->UpdateWardenTimer(m_timers[WUPDATE_WARDEN].GetCurrent());
+
+        ///- Then call the update method of WardenMgr Singleton
+        sWardenMgr->Update(m_timers[WUPDATE_WARDEN].GetCurrent());
+        m_timers[WUPDATE_WARDEN].SetCurrent(0);
+    }
+
     ///- Delete all characters which have been deleted X days before
     if (m_timers[WUPDATE_DELETECHARS].Passed())
     {
@@ -2293,6 +2323,18 @@ void World::KickAllLess(AccountTypes sec)
     for (SessionMap::const_iterator itr = m_sessions.begin(); itr != m_sessions.end(); ++itr)
         if (itr->second->GetSecurity() < sec)
             itr->second->KickPlayer();
+}
+
+BanReturn World::BanAccount(WorldSession *session, uint32 duration_secs, std::string reason, std::string author)
+{
+    LoginDatabase.PExecute("INSERT INTO account_banned VALUES ('%u', '%u', UNIX_TIMESTAMP(), UNIX_TIMESTAMP()+%u, '%s', '%s', '1')",
+    session->GetAccountId(),
+    ConfigMgr::GetIntDefault("RealmID", 0),
+    duration_secs,
+    author.c_str(),
+    reason.c_str());
+    session->KickPlayer();
+    return BAN_SUCCESS;
 }
 
 /// Ban an account or ban an IP address, duration will be parsed using TimeStringToSecs if it is positive, otherwise permban

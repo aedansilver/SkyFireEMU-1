@@ -39,11 +39,11 @@ union u_map_magic
     uint32 asUInt;
 };
 
-u_map_magic MapMagic        = { {'M','A','P','S'} };
-u_map_magic MapVersionMagic = { {'v','1','.','1'} };
-u_map_magic MapAreaMagic    = { {'A','R','E','A'} };
-u_map_magic MapHeightMagic  = { {'M','H','G','T'} };
-u_map_magic MapLiquidMagic  = { {'M','L','I','Q'} };
+u_map_magic MapMagic        = { {'M', 'A', 'P', 'S'} };
+u_map_magic MapVersionMagic = { {'v', '1', '.', '1'} };
+u_map_magic MapAreaMagic    = { {'A', 'R', 'E', 'A'} };
+u_map_magic MapHeightMagic  = { {'M', 'H', 'G', 'T'} };
+u_map_magic MapLiquidMagic  = { {'M', 'L', 'I', 'Q'} };
 
 #define DEFAULT_GRID_EXPIRY     300
 #define MAX_GRID_LOAD_TIME      50
@@ -778,7 +778,7 @@ void Map::MoveAllCreaturesInMoveList()
         }
 
         c->_moveState = CREATURE_CELL_MOVE_NONE;
-        if(!c->IsInWorld())
+        if (!c->IsInWorld())
             continue;
 
         // do move or do move to respawn or remove creature if previous all fail

@@ -3714,13 +3714,13 @@ void ObjectMgr::LoadQuests()
     //   138                     139                     140                     141
         "OfferRewardEmoteDelay1, OfferRewardEmoteDelay2, OfferRewardEmoteDelay3, OfferRewardEmoteDelay4, "
     //   142             143             144         145                 146
-        "RewSkillLineId, RewSkillPoints, RewRepMask, QuestGiverPortrait, QuestTurnInPortrait,"
+        "RewSkillLineId, RewSkillPoints, RewRepMask, QuestGiverPortrait, QuestTurnInPortrait, "
     //   147             148                149             150                151             152                153             154
-        "RewCurrencyId1, RewCurrencyCount1, RewCurrencyId2, RewCurrencyCount2, RewCurrencyId3, RewCurrencyCount3, RewCurrencyId4, RewCurrencyCount4,"
+        "RewCurrencyId1, RewCurrencyCount1, RewCurrencyId2, RewCurrencyCount2, RewCurrencyId3, RewCurrencyCount3, RewCurrencyId4, RewCurrencyCount4, "
     //   155             156                157             158                159             160                161             162
-        "ReqCurrencyId1, ReqCurrencyCount1, ReqCurrencyId2, ReqCurrencyCount2, ReqCurrencyId3, ReqCurrencyCount3, ReqCurrencyId4, ReqCurrencyCount4,"
+        "ReqCurrencyId1, ReqCurrencyCount1, ReqCurrencyId2, ReqCurrencyCount2, ReqCurrencyId3, ReqCurrencyCount3, ReqCurrencyId4, ReqCurrencyCount4, "
     //   163                     164                    165                      166                     167              168             169          170          171
-        "QuestGiverPortraitText, QuestGiverPortraitUnk, QuestTurnInPortraitText, QuestTurnInPortraitUnk, QuestTargetMark, QuestStartType, SoundAccept, SoundTurnIn, RequiredSpell,"
+        "QuestGiverPortraitText, QuestGiverPortraitUnk, QuestTurnInPortraitText, QuestTurnInPortraitUnk, QuestTargetMark, QuestStartType, SoundAccept, SoundTurnIn, RequiredSpell, "
     //   172          173
         "StartScript, CompleteScript"
         " FROM quest_template");
@@ -6984,7 +6984,7 @@ void ObjectMgr::LoadReputationSpilloverTemplate()
     m_RepSpilloverTemplateMap.clear();                      // for reload case
 
     uint32 count = 0;
-    QueryResult result = WorldDatabase.Query("SELECT faction, faction1, rate_1, rank_1, faction2, rate_2, rank_2, faction3, rate_3, rank_3, faction4, rate_4, rank_4,faction5,rate_5,rank_5 FROM reputation_spillover_template");
+    QueryResult result = WorldDatabase.Query("SELECT faction, faction1, rate_1, rank_1, faction2, rate_2, rank_2, faction3, rate_3, rank_3, faction4, rate_4, rank_4, faction5, rate_5, rank_5 FROM reputation_spillover_template");
 
     if (!result)
     {

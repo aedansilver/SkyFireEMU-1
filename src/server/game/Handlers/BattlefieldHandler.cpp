@@ -132,7 +132,7 @@ void WorldSession::HandleBfEntryInviteResponse(WorldPacket & recv_data)
     uint64 BattleId = data &~ 0x20000;
 
     Battlefield* Bf= sBattlefieldMgr.GetBattlefieldByBattleId((uint32)BattleId);
-    if(!Bf)
+    if (!Bf)
         return;
 
     //If player accept invitation

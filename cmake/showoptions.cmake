@@ -24,6 +24,12 @@ else()
   message("* Build world/authserver : No")
 endif()
 
+if( SERVERS )
+  message("* Build world/warden       : Yes (default)")
+else()
+  message("* Build world/wardenserver : No")
+endif()
+
 if( SCRIPTS )
   message("* Build with scripts     : Yes (default)")
   add_definitions(-DSCRIPTS)

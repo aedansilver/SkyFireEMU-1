@@ -167,7 +167,7 @@ class achievement_defenseless : public AchievementCriteriaScript
 
         bool OnCheck(Player* /*player*/, Unit* target)
         {
-            if(!target)
+            if (!target)
                 return false;
 
             InstanceScript* instance = target->GetInstanceScript();

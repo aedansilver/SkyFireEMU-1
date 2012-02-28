@@ -31,6 +31,7 @@
 #include "Player.h"
 #include "Vehicle.h"
 #include "ObjectMgr.h"
+#include "WardenMgr.h"
 #include "GuildMgr.h"
 #include "Group.h"
 #include "Guild.h"
@@ -95,7 +96,8 @@ m_playerRecentlyLogout(false), m_playerSave(false),
 m_sessionDbcLocale(sWorld->GetAvailableDbcLocale(locale)),
 m_sessionDbLocaleIndex(locale),
 m_latency(0), m_TutorialsChanged(false), recruiterId(recruiter),
-isRecruiter(isARecruiter), timeLastWhoCommand(0)
+isRecruiter(isARecruiter), timeLastWhoCommand(0),
+m_wardenStatus(WARD_STATE_UNREGISTERED), m_WardenClientChecks(NULL)
 {
     if (sock)
     {
@@ -127,6 +129,9 @@ WorldSession::~WorldSession()
     WorldPacket* packet = NULL;
     while (_recvQueue.next(packet))
         delete packet;
+
+    ///- inform Warden Manager
+    sWardenMgr->Unregister(this);
 
     LoginDatabase.PExecute("UPDATE account SET online = 0 WHERE id = %u;", GetAccountId());     // One-time query
 }
@@ -347,8 +352,8 @@ bool WorldSession::Update(uint32 diff, PacketFilter& updater)
 
     ProcessQueryCallbacks();
 
-    //check if we are safe to proceed with logout
-    //logout procedure should happen only in World::UpdateSessions() method!!!
+    // check if we are safe to proceed with logout
+    // logout procedure should happen only in World::UpdateSessions() method!!!
     if (updater.ProcessLogout())
     {
         time_t currTime = time(NULL);
@@ -364,8 +369,11 @@ bool WorldSession::Update(uint32 diff, PacketFilter& updater)
         }
 
         if (!m_Socket)
-            return false;                                       //Will remove this session from the world session map
+            return false;                                       // Will remove this session from the world session map
     }
+    //Process Warden related update for this session
+    if (sWardenMgr->IsEnabled())
+        sWardenMgr->Update(this);                               // Called 2 times from Map::Update and World::UpdateSessions
 
     return true;
 }

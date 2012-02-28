@@ -2416,7 +2416,7 @@ class Player : public Unit, public GridObject<Player>
                 last_known = 1;
 
             for (uint32 i = uint32(PET_SLOT_HUNTER_FIRST); i < last_known; i++)
-                if((_petSlotUsed & (1 << i)) == 0)
+                if ((_petSlotUsed & (1 << i)) == 0)
                     return PetSlot(i);
 
             // If there is no slots available, then we should point that out

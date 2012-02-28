@@ -253,13 +253,13 @@ public:
 
         void UpdateAI(const uint32 Diff)
         {
-			if(instance->GetData(DATA_CORBORUS_EVENT) == DONE || instance->GetData(DATA_CORBORUS_EVENT) == NOT_STARTED)
+			if (instance->GetData(DATA_CORBORUS_EVENT) == DONE || instance->GetData(DATA_CORBORUS_EVENT) == NOT_STARTED)
 				me->DespawnOrUnsummon();
             if (_SpellBoreTimer <= Diff)
             {
-				if(!IsHeroic())
+				if (!IsHeroic())
 					DoCast(me->getVictim(),SPELL_ROCK_BORE);
-				if(IsHeroic())
+				if (IsHeroic())
 					DoCast(me->getVictim(),H_SPELL_ROCK_BORE);
                 _SpellBoreTimer = 6000;
             }

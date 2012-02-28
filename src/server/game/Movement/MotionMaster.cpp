@@ -361,7 +361,7 @@ void MotionMaster::MoveJump(float x, float y, float z, float speedXY, float spee
     sLog->outStaticDebug("Unit (GUID: %u) jump to point (X: %f Y: %f Z: %f)", i_owner->GetGUIDLow(), x, y, z);
 
     float moveTimeHalf = speedZ / Movement::gravity;
-    float max_height = -Movement::computeFallElevation(moveTimeHalf, false,-speedZ);
+    float max_height = -Movement::computeFallElevation(moveTimeHalf, false, -speedZ);
 
     Movement::MoveSplineInit init(*i_owner);
     init.MoveTo(x, y, z);
@@ -390,7 +390,7 @@ void MotionMaster::MoveFall(uint32 id/*=0*/)
         return;
 
     Movement::MoveSplineInit init(*i_owner);
-    init.MoveTo(i_owner->GetPositionX(),i_owner->GetPositionY(),tz);
+    init.MoveTo(i_owner->GetPositionX(), i_owner->GetPositionY(), tz);
     init.SetFall();
     init.Launch();
     Mutate(new EffectMovementGenerator(id), MOTION_SLOT_CONTROLLED);

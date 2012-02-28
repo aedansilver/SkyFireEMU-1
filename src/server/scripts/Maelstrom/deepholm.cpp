@@ -86,12 +86,12 @@ class npc_slaincrewmember : public CreatureScript
         }
         void UpdateAI(uint32 const diff)
         {
-            if(!QuestInProgress)
+            if (!QuestInProgress)
                 return;
 
             Player* player = Unit::GetPlayer(*me, playerGUID);
 
-            if(!player)
+            if (!player)
                 return;
 
             if (sayTimer <= diff)

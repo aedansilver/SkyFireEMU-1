@@ -15,7 +15,7 @@ file(GLOB_RECURSE sources_TCSoap TCSoap/*.cpp TCSoap/*.h)
 file(GLOB_RECURSE sources_WorldThread WorldThread/*.cpp WorldThread/*.h)
 file(GLOB sources_localdir *.cpp *.h)
 
-if( USE_COREPCH )
+if ( USE_COREPCH )
   include_directories(${CMAKE_CURRENT_BINARY_DIR})
 endif()
 
@@ -35,7 +35,7 @@ set(worldserver_SRCS
   ${sources_localdir}
 )
 
-if( WIN32 )
+if ( WIN32 )
   set(worldserver_SRCS
     ${worldserver_SRCS}
     ${sources_Debugging}
@@ -128,6 +128,7 @@ include_directories(
   ${CMAKE_SOURCE_DIR}/src/server/game/Spells
   ${CMAKE_SOURCE_DIR}/src/server/game/Spells/Auras
   ${CMAKE_SOURCE_DIR}/src/server/game/Tools
+  ${CMAKE_SOURCE_DIR}/src/server/game/Warden  
   ${CMAKE_SOURCE_DIR}/src/server/game/Weather
   ${CMAKE_SOURCE_DIR}/src/server/game/World
   ${CMAKE_SOURCE_DIR}/src/server/authserver/Server
@@ -145,13 +146,13 @@ set(worldserver_LINK_FLAGS "")
 
 add_executable(worldserver ${worldserver_SRCS})
 
-if( NOT WIN32 )
+if ( NOT WIN32 )
   add_definitions(-D_TRINITY_CORE_CONFIG='"${CONF_DIR}/worldserver.conf"')
 endif()
 
 add_dependencies(worldserver revision.h)
 
-if( UNIX )
+if ( UNIX )
   set(worldserver_LINK_FLAGS "-pthread -lncurses ${worldserver_LINK_FLAGS}")
 endif()
 
@@ -175,14 +176,14 @@ target_link_libraries(worldserver
   ${OSX_LIBS}
 )
 
-if( WIN32 )
+if ( WIN32 )
   add_custom_command(TARGET worldserver
     POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/worldserver.conf.dist ${CMAKE_BINARY_DIR}/bin/$(ConfigurationName)/
   )
 endif()
 
-if( UNIX )
+if ( UNIX )
   install(TARGETS worldserver DESTINATION bin)
   install(FILES worldserver.conf.dist DESTINATION etc)
 elseif( WIN32 )
@@ -191,8 +192,8 @@ elseif( WIN32 )
 endif()
 
 # Generate precompiled header
-if( USE_COREPCH )
-  if(CMAKE_COMPILER_IS_GNUCXX)
+if ( USE_COREPCH )
+  if (CMAKE_COMPILER_IS_GNUCXX)
     add_precompiled_header(worldserver ${CMAKE_CURRENT_SOURCE_DIR}/PrecompiledHeaders/worldPCH.h)
   elseif(MSVC)
     add_native_precompiled_header(worldserver ${CMAKE_CURRENT_SOURCE_DIR}/PrecompiledHeaders/worldPCH)

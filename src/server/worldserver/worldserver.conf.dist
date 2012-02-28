@@ -12,6 +12,7 @@
 #    SERVER LOGGING
 #    SERVER SETTINGS
 #    PLAYER INTERACTION
+#    WARDEN SERVER SETTINGS
 #    CREATURE SETTINGS
 #    CHAT SETTINGS
 #    GAME MASTER SETTINGS
@@ -1550,6 +1551,41 @@ AllowTwoSide.Trade = 0
 #                     0 - (Disabled)
 
 TalentsInspecting = 1
+
+#
+###################################################################################################
+
+###################################################################################################
+# WARDEN SERVER SETTINGS - This daemon requires a Windows box to run. If you don't have any, let it disabled
+#
+#    Wardenserver.enable
+#        Enable or disable warden functionnalities
+#        Default: 0  - Disabled, worldserver will neither use Wardenserver, not generate any warden related traffic
+#                 1  - Enable, worldserver will connect to Wardenserver and generate cheat ckecks for all sessions
+
+Wardenserver.enable = 1
+
+#
+#    Wardenserver.ban
+#        Enable or disable banning accounts
+#                 0  - Disabled, worldserver will kick accounts failing a cheat-check
+#        Default: 1  - Enable, worldserver will ban for 24H any account failing a cheat-check
+
+Wardenserver.ban = 1
+
+#
+#   Wardenserver.address
+#        IP Address of the computer running the Win32 Warden Daemon
+#        Default: 127.0.0.1  - Assume you run the Warden Daemon on the same machine as SkyFireEMU Daemon and on Windows
+
+Wardenserver.address = "127.0.0.1"
+
+#
+#   Wardenserver.port
+#        Port on which the Warden Daemon listens
+#        Default: 6555
+
+Wardenserver.port = 6555
 
 #
 ###################################################################################################

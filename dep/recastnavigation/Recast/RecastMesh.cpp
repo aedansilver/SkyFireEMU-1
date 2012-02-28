@@ -1063,7 +1063,7 @@ bool rcBuildPolyMesh(rcContext* ctx, rcContourSet& cset, int nvp, rcPolyMesh& me
 		// Merge polygons.
 		if (nvp > 3)
 		{
-			for(;;)
+			for (;;)
 			{
 				// Find best polygons to merge.
 				int bestMergeVal = 0;

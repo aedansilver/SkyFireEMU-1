@@ -1328,7 +1328,7 @@ void SmartScript::ProcessAction(SmartScriptHolder& e, Unit* unit, uint32 var0, u
                 target = targets->front();
             }
 
-            if(!target)
+            if (!target)
                 me->GetMotionMaster()->MovePoint(0, e.target.x, e.target.y, e.target.z);
             else
                 me->GetMotionMaster()->MovePoint(0, target->GetPositionX(), target->GetPositionY(), target->GetPositionZ());

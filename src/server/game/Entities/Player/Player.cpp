@@ -8067,14 +8067,14 @@ void Player::_ApplyItemMods(Item *item, uint8 slot, bool apply)
 
 void Player::ApplyReforgedStats(Item* item, bool apply)
 {
-    if(!item)
+    if (!item)
         return;
 
     uint32 reforgeId = item->GetUInt32Value(ITEM_FIELD_ENCHANTMENT_9_1);
 
     const ItemReforgeEntry* stats = sItemReforgeStore.LookupEntry(reforgeId);
 
-    if(!stats)
+    if (!stats)
         return;
 
     const ItemTemplate* proto = item->GetTemplate();
@@ -25887,10 +25887,10 @@ void Player::UpdateMasteryAuras(uint32 branch)
     bool canHaveMastery = HasAuraType(SPELL_AURA_MASTERY);
     TalentTabEntry const* tab = sTalentTabStore.LookupEntry(branch);
 
-    if(!tab)
+    if (!tab)
         return;
 
-    if(!canHaveMastery)
+    if (!canHaveMastery)
     {
         // Remove all mastery spells
         for (int i = 0; i < MAX_TALENT_MASTERY_SPELLS; i ++)
@@ -25930,7 +25930,7 @@ void Player::RecalculateMasteryAuraEffects(uint32 branch)
 {
     TalentTabEntry const* tab = sTalentTabStore.LookupEntry(branch);
 
-    if(!tab)
+    if (!tab)
         return;
 
     for (int i = 0; i < MAX_TALENT_MASTERY_SPELLS; i ++)

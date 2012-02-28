@@ -181,7 +181,7 @@ public:
             {
                 bool Continue = false;
 
-                switch(data)
+                switch (data)
                 {
                     case 1:
                         if (me->GetDistance2d(-8807.426758f, -163.300751f) <= 2.0f)
@@ -207,7 +207,7 @@ public:
                     Paxton->SetOrientation(me->GetAngle(Paxton));
                     Paxton->SendMovementFlagUpdate();
                     DoScriptText(RAND(SAY_PAXTON_NORMAL_1, SAY_PAXTON_NORMAL_2, SAY_PAXTON_NORMAL_3, SAY_PAXTON_NORMAL_4, SAY_PAXTON_NORMAL_5), Paxton);
-                    switch(type)
+                    switch (type)
                     {
                         case 1:
                             Paxton->AI()->DoCast(me, SPELL_PRAYER_OF_HEALING);
@@ -644,11 +644,11 @@ public:
             {
                 if (RunTimer <= diff)
                 {
-                    switch(Phase)
+                    switch (Phase)
                     {
                         case 0:
                         {
-                            switch(urand(0, 3))
+                            switch (urand(0, 3))
                             {
                                 //I'm really lazy ;)
                                 case 0: me->MonsterSay("Bless you, hero!", 0, NULL); break;

@@ -105,7 +105,7 @@ class npc_thug: public CreatureScript
 
         void StartEvent()
         {
-            if(!bSummoned)
+            if (!bSummoned)
             {
                 if (Creature* Thug1 = me->SummonCreature(NPC_THUG, -9859.36f, 1332.42f, 41.985f, 2.495f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 90000))
                 if (Creature* Thug2 = me->SummonCreature(NPC_THUG, -9862.51f, 1332.079f, 41.985f, 0.85f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 90000))
@@ -636,7 +636,7 @@ class npc_crate_mine : public CreatureScript
 
         void PartySummoned()
         {
-            if(!bSummoned)
+            if (!bSummoned)
             {
                 if (Creature* glubtok1 = me->SummonCreature(42492, -9848.11f, 1395.29f, 37.70f, 0.56f, TEMPSUMMON_TIMED_OR_DEAD_DESPAWN, 85000))
                 if (Creature* shadowy1 = me->SummonCreature(42515, -9826.083f, 1406.738f, 36.885f, 3.56f, TEMPSUMMON_TIMED_OR_DEAD_DESPAWN, 85000))
@@ -1020,7 +1020,7 @@ class npc_shadowy_trigger : public CreatureScript
 
         void StartSpeech()
         {
-            if(!bSummoned)
+            if (!bSummoned)
             {
                 if (Creature* Shadowy2 = me->SummonCreature(NPC_SHADOWY2,-11016.31f, 1478.82f, 47.80f, 2.016f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 90000))
                 {
@@ -1034,7 +1034,7 @@ class npc_shadowy_trigger : public CreatureScript
 
         void SummonCrowd()
         {
-            if(!bSummoned1)
+            if (!bSummoned1)
             {
                 if (Creature* Witness1 = me->SummonCreature(NPC_LISTENER,-11009.036f, 1490.47f, 43.58f, 4.16f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 90000))
                 if (Creature* Witness2 = me->SummonCreature(NPC_LISTENER,-11010.76f, 1488.21f, 43.57f, 4.33f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 90000))
@@ -1174,7 +1174,7 @@ class npc_shadowy_trigger : public CreatureScript
                             {
                                 if (Creature* listener = me->FindNearestCreature(NPC_LISTENER, 35.0f, true))
                                 {
-                                    if(!bText)
+                                    if (!bText)
                                     {
                                         me->MonsterTextEmote("<homeless people applaud and cheer>", NULL, true);
                                         listener->TextEmote(TEXT_EMOTE_APPLAUD, PlayerGUID, false);
@@ -1263,9 +1263,9 @@ class npc_shadowy_tower : public CreatureScript
 
         void StartEvent()
         {
-            if(!bSumm)
+            if (!bSumm)
             {
-                if(!bSumm1)
+                if (!bSumm1)
                 {
                     if (Creature* Shadowy3 = me->SummonCreature(42662, -11138.659f, 545.20f, 70.30f, 0.19f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 90000))
                     {
@@ -1277,7 +1277,7 @@ class npc_shadowy_tower : public CreatureScript
                     }
                 }
 
-                if(!bSumm2)
+                if (!bSumm2)
                 {
                     if (Creature* Glubtok3 = me->SummonCreature(42492,-11128.11f, 547.52f, 70.41f, 3.32f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 90000))
                     {
@@ -1386,7 +1386,7 @@ class npc_shadowy_tower : public CreatureScript
                             }
                             case 11:
                             {
-                                if(!bExit)
+                                if (!bExit)
                                 {
                                     Shadowy3->CastSpell(Shadowy3, 64446, true);
                                     Shadowy3->ForcedDespawn(1000);
@@ -1449,7 +1449,7 @@ class npc_rise_br : public CreatureScript
     {
         if (quest->GetQuestId() == QUEST_RISE_OF_THE_BROTHERHOOD)
         {
-            if(!(CAST_AI(npc_rise_br::npc_rise_brAI, creature->AI())->EventStarted))
+            if (!(CAST_AI(npc_rise_br::npc_rise_brAI, creature->AI())->EventStarted))
             {
                 CAST_AI(npc_rise_br::npc_rise_brAI, creature->AI())->EventStarted = true;
                 CAST_AI(npc_rise_br::npc_rise_brAI, creature->AI())->PlayerGUID = player->GetGUID();
@@ -2049,7 +2049,7 @@ class npc_horatio_investigate : public CreatureScript
 
         void StartSummon()
         {
-            if(!bSummonn)
+            if (!bSummonn)
             {
                 if (Creature* Investigator04 = me->SummonCreature(NPC_INVESTIGATOR4, -9856.825f, 1279.25f, 40.96f, 3.29f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 66000))
                 {
