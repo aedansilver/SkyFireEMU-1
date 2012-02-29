@@ -1474,20 +1474,11 @@ void WorldSession::HandleTimeSyncResp(WorldPacket & recv_data)
 void WorldSession::HandleResetInstancesOpcode(WorldPacket & /*recv_data*/)
 {
     sLog->outDebug(LOG_FILTER_NETWORKIO, "WORLD: CMSG_RESET_INSTANCES");
-    Group* group = _player->GetGroup();
-    if (group)
-    {
+    if (Group* group = _player->GetGroup())
         if (group->IsLeader(_player->GetGUID()))
-        {
             group->ResetInstances(INSTANCE_RESET_ALL, false, _player);
-            group->ResetInstances(INSTANCE_RESET_ALL, true, _player);
-        }
-    }
     else
-    {
         _player->ResetInstances(INSTANCE_RESET_ALL, false);
-        _player->ResetInstances(INSTANCE_RESET_ALL, true);
-    }
 }
 
 void WorldSession::HandleSetDungeonDifficultyOpcode(WorldPacket & recv_data)
@@ -1507,7 +1498,7 @@ void WorldSession::HandleSetDungeonDifficultyOpcode(WorldPacket & recv_data)
         return;
 
     // cannot reset while in an instance
-    Map* map = _player->GetMap();
+    Map* map = _player->FindMap();
     if (map && map->IsDungeon())
     {
         sLog->outError("WorldSession::HandleSetDungeonDifficultyOpcode: player (Name: %s, GUID: %u) tried to reset the instance while player is inside!", _player->GetName(), _player->GetGUIDLow());
@@ -1528,8 +1519,7 @@ void WorldSession::HandleSetDungeonDifficultyOpcode(WorldPacket & recv_data)
                 if (!pGroupGuy->IsInMap(pGroupGuy))
                     return;
 
-                map = pGroupGuy->GetMap();
-                if (map && map->IsNonRaidDungeon())
+                if (pGroupGuy->GetMap()->IsNonRaidDungeon())
                 {
                     sLog->outError("WorldSession::HandleSetDungeonDifficultyOpcode: player %d tried to reset the instance while group member (Name: %s, GUID: %u) is inside!", _player->GetGUIDLow(), pGroupGuy->GetName(), pGroupGuy->GetGUIDLow());
                     return;
@@ -1562,7 +1552,7 @@ void WorldSession::HandleSetRaidDifficultyOpcode(WorldPacket & recv_data)
     }
 
     // cannot reset while in an instance
-    Map* map = _player->GetMap();
+    Map* map = _player->FindMap();
     if (map && map->IsDungeon())
     {
         sLog->outError("WorldSession::HandleSetRaidDifficultyOpcode: player %d tried to reset the instance while inside!", _player->GetGUIDLow());
@@ -1586,8 +1576,7 @@ void WorldSession::HandleSetRaidDifficultyOpcode(WorldPacket & recv_data)
                 if (!pGroupGuy->IsInMap(pGroupGuy))
                     return;
 
-                map = pGroupGuy->GetMap();
-                if (map && map->IsRaid())
+                if (pGroupGuy->GetMap()->IsRaid())
                 {
                     sLog->outError("WorldSession::HandleSetRaidDifficultyOpcode: player %d tried to reset the instance while inside!", _player->GetGUIDLow());
                     return;
