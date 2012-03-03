@@ -1,3 +1,4 @@
+# Copyright (C) 2011-2012 Project SkyFire <http://www.projectskyfire.org/>
 # Copyright (C) 2008-2012 TrinityCore <http://www.trinitycore.org/>
 #
 # This file is free software; as a special exception the author gives
@@ -16,7 +17,12 @@ file(GLOB_RECURSE sources_Management Management/*.cpp Management/*.h)
 file(GLOB_RECURSE sources_Maps Maps/*.cpp Maps/*.h)
 file(GLOB_RECURSE sources_Models Models/*.cpp Models/*.h)
 file(GLOB_RECURSE sources_Pathfinding Pathfinding/*.cpp Pathfinding/*.h)
+
 file(GLOB sources_localdir *.cpp *.h)
+
+#
+# Build collision sourcelist
+#
 
 if( USE_COREPCH AND MSVC )
   set(collision_STAT_SRCS
