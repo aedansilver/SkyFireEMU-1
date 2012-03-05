@@ -24,6 +24,7 @@
 #include "FollowerReference.h"
 #include "PathFinderMovementGenerator.h"
 #include "Timer.h"
+#include "Unit.h"
 
 class TargetedMovementGeneratorBase
 {
