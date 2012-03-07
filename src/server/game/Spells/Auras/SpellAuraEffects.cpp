@@ -3133,7 +3133,7 @@ void AuraEffect::HandleAuraAllowFlight(AuraApplication const* aurApp, uint8 mode
 
 void AuraEffect::HandleModCanCastWhileWalking(AuraApplication const* aurApp, uint8 mode, bool apply) const
 {
-    uint32 spellId = 93395; // actual spell:546, this needs added else where in spellsystem to work. using temp spell.
+    uint32 spellId = 93395; // actual spell:546, this spell atm is not working, using temp spell.
     Unit* target = aurApp->GetTarget();
 
     if (!(mode & AURA_EFFECT_HANDLE_SEND_FOR_CLIENT_MASK))
@@ -3141,11 +3141,11 @@ void AuraEffect::HandleModCanCastWhileWalking(AuraApplication const* aurApp, uin
 
     if (apply)    // ToDo: need to set CanCastWhileWalking(spell_id) on switch with other Dependant spells.
     {
-        target->CastSpell(target, 93395, true);  // waterwalk
+        target->CastSpell(target, 93395, true);  // waterwalk (temp)
     }
-    else if (!(target->ToPlayer()->CanCastWhileWalking(spellId)));
+    else if (!(target->ToPlayer()->CanCastWhileWalking(spellId)))
     {
-        target->RemoveAura(104);
+        target->RemoveAura(104); // waterwalk aura
     }
 }
 
