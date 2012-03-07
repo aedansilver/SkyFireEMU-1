@@ -280,7 +280,7 @@ bool WorldSession::Update(uint32 diff, PacketFilter& updater)
                             "the player has not logged in yet and not recently logout");
                     else
                     {
-                        // not expected _player or must checked in packet hanlder
+                        // not expected _player or must checked in packet handler
                         sScriptMgr->OnPacketReceive(m_Socket, WorldPacket(*packet));
                         (this->*opHandle.handler)(*packet);
                         if (sLog->IsOutDebug() && packet->rpos() < packet->wpos())
@@ -319,9 +319,9 @@ bool WorldSession::Update(uint32 diff, PacketFilter& updater)
                         LogUnprocessedTail(packet);
                     break;
                 case STATUS_NEVER:
-                    sLog->outError("SESSION (account: %u, guidlow: %u, char: %s): received not allowed opcode %s (0x%.4X)",
+                    /*sLog->outError("SESSION (account: %u, guidlow: %u, char: %s): received not allowed opcode %s (0x%.4X)",
                         GetAccountId(), m_GUIDLow, _player ? _player->GetName() : "<none>",
-                        LookupOpcodeName(packet->GetOpcode()), packet->GetOpcode());
+                        LookupOpcodeName(packet->GetOpcode()), packet->GetOpcode());*/
                     break;
                 case STATUS_UNHANDLED:
                     sLog->outDebug(LOG_FILTER_NETWORKIO, "SESSION (account: %u, guidlow: %u, char: %s): received not handled opcode %s (0x%.4X)",
